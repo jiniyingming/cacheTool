@@ -14,11 +14,11 @@
 ```PHP
 <?php
 CacheToolFunc::instance()->inputParams($params)
-            ->callStaticFunc(\Modules\Business\Services\ShareLink\CacheFunc::class, 'getData')
+            ->callStaticFunc(CacheFunc::class, 'getData')
             ->setMaxSliceSize(40)
             ->setTemplate([
-                'id' => 'doc_id',
-                'name' => 'project_name'
+                'id' => '_id',
+                ...
             ])
             ->setTTl(120)
             ->keepTime(2)
