@@ -1,4 +1,4 @@
-<?php
+<?phphttps://github.com/jiniyingming/cacheTool/blob/main/cacheTool/CacheTool/FlushHotData.php
 
 namespace App\component\CacheTool;
 
@@ -42,10 +42,16 @@ class FlushHotData implements ShouldQueue
                         $cacheFunc = $cacheFunc->$func(...$args);
                     }
                     if ($cacheFunc->flush()->exec()) {
-                        self::dispatch($this->args)->delay($this->args['maxDelaySec'])->onQueue(config('queue.high'));
+                        self::dispatch($this->args)->delay($this->args['maxDelaySec'])->onQueue(config('queue.p3'));
                     }
                 }
             }
+        } elseif (isset($this->args['dealFuncMap'], $this->args['asyncFlushCache'])) {
+            $cacheFunc = CacheToolFunc::instance();
+            foreach ($this->args['dealFuncMap'] as $func => $args) {
+                $cacheFunc = $cacheFunc->$func(...$args);
+            }
+            $cacheFunc->flush()->exec();
         }
     }
 
