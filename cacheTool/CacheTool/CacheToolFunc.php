@@ -169,5 +169,17 @@ class CacheToolFunc extends CacheFunc implements CacheTool, Cache
         return $this;
     }
 
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function asyncFlushCache(): bool
+    {
+        $this->asyncFlushCache = true;
+        $this->execute();
+        $this->isCallExec = true;
+        return true;
+    }
+
 
 }
